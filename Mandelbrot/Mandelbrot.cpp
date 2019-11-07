@@ -1,5 +1,6 @@
 #include <complex>
 #include <cstdio>
+#include <omp>
 
 int MandelbrotCalculate(std::complex<double> c, int maxiter)
 {

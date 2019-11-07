@@ -3,6 +3,7 @@
 #define MATRIX_H
 
 #include <vector>
+#include <omp>
 
 template<typename Object>
 class Matrix
@@ -10,6 +11,7 @@ class Matrix
 	public:
 		matrix(int rows, int columns) : array(rows)
 		{
+			#pragma omp parallel
 			for(auto &thisRow : array)
 				thisRow.resize(columns);
 		}
@@ -21,24 +23,16 @@ class Matrix
 		{}
 
 		const vector<Object> & operator [](int row) const
-		{
-			return array[row];
-		}
+		{  return array[row];  }
 
 		const vector<Object> & operator [](int row)
-		{
-			return array[row];
-		}
+		{  return array[row];  }
 
 		int numRows() const
-		{
-			return array.size();
-		}
+		{  return array.size();  }
 
 		int numCols() const
-		{
-			return numRows() ? array[0].size : 0;
-		}
+		{  return numRows() ? array[0].size : 0;  }
 
 	private:
 		vector<vector<Object>> array;
